@@ -1,5 +1,5 @@
 import "./App.css";
-import NavBar from "./NavBar";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
