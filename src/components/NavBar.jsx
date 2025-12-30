@@ -11,13 +11,37 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
+// themes
+
+import { useColorScheme } from "@mui/material/styles";
+
 export default function NavBar() {
+  // set mood
+  const { mode, setMode } = useColorScheme();
+  const isDarkMode = mode === "dark";
+  const handleToggle = () => {
+    setMode(isDarkMode ? "light" : "dark");
+  };
+  if (!mode) {
+    return <Box component="nav" />;
+  }
+
   return (
-    <nav className=" p-7 bg-pink-300 text-white">
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
+    <Box
+      component="nav"
+      className=" p-7"
+      sx={{
+        bgcolor: "primary.main",
+      }}
+    >
+      <Box
+        sx={{
+          flexGrow: 1,
+        }}
+      >
+        <Grid container>
           <Grid bgcolor={"black"} size={8}>
-            <h1 className="text-5xl font-MonteCarlo">Rosy Moment</h1>
+            <h1 className="text-5xl font-MonteCarlo text-white">Rosy Moment</h1>
           </Grid>
 
           {/* icons */}
@@ -26,45 +50,31 @@ export default function NavBar() {
             container
             spacing={1}
             size={4}
-            display="flex"
             flexDirection="row-reverse"
             justifyItems="flex-end"
-            sx={{
-              "& .MuiButton-root": {
-                borderRadius: 0,
-                color: "common.white",
-                transition: "box-shadow 0.2s ease",
-
-                "&:focus": {
-                  outline: "none",
-                },
-                "&:hover": {
-                  boxShadow: "inset 0 -2px 0 rgba(255,255,255,0.5)",
-                },
-              },
-            }}
+            className="text-white"
           >
             <Button key="login">
               <PersonIcon fontSize="large" />
-              login
+              Login
             </Button>
 
             <Button key="shoppingcart">
               <ShoppingCartIcon fontSize="large" />
             </Button>
 
-            <Button key="darkMood">
-              <DarkModeIcon fontSize="large" />
-            </Button>
-
-            <Button key="lightMood">
-              <LightModeIcon fontSize="large" />
+            <Button onClick={handleToggle}>
+              {isDarkMode ? (
+                <DarkModeIcon fontSize="large" />
+              ) : (
+                <LightModeIcon fontSize="large" />
+              )}
             </Button>
           </Grid>
 
           {/* ==icons== */}
         </Grid>
       </Box>
-    </nav>
+    </Box>
   );
 }
