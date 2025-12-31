@@ -4,12 +4,14 @@ import Grid from "@mui/material/Grid";
 
 // btn
 import Button from "@mui/material/Button";
+import InputBase from "@mui/material/InputBase";
 
 // icons
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import SearchIcon from "@mui/icons-material/Search";
 
 // themes
 
@@ -40,9 +42,39 @@ export default function NavBar() {
         }}
       >
         <Grid container>
-          <Grid bgcolor={"black"} size={8}>
-            <h1 className="text-5xl font-MonteCarlo text-white">Rosy Moment</h1>
+          {/* logo */}
+
+          <Grid size={4}>
+            <h1
+              style={{ fontFamily: "MonteCarlo" }}
+              className="text-5xl text-white"
+            >
+              Rosy Moment
+            </h1>
           </Grid>
+
+          {/* ===logo=== */}
+
+          {/* search bar */}
+
+          <Grid size={4} className="mt-3 !text-white flex justify-center">
+            <div className="border-1 pl-3 w-fit">
+              <InputBase
+                className="w-100 !text-white"
+                placeholder="What are you looking for?"
+                inputProps={{ "aria-label": "search" }}
+              />
+
+              <Button
+                aria-label="search"
+                className="!border-l-1 hover:!border-white"
+              >
+                <SearchIcon />
+              </Button>
+            </div>
+          </Grid>
+
+          {/* ===search bar=== */}
 
           {/* icons */}
 
@@ -54,16 +86,16 @@ export default function NavBar() {
             justifyItems="flex-end"
             className="text-white"
           >
-            <Button key="login">
+            <Button key="login" className="nav-btn">
               <PersonIcon fontSize="large" />
               Login
             </Button>
 
-            <Button key="shoppingcart">
+            <Button key="shoppingcart" className="nav-btn">
               <ShoppingCartIcon fontSize="large" />
             </Button>
 
-            <Button onClick={handleToggle}>
+            <Button onClick={handleToggle} className="nav-btn">
               {isDarkMode ? (
                 <DarkModeIcon fontSize="large" />
               ) : (

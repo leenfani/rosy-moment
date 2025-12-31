@@ -43,15 +43,11 @@ export const Themes = createTheme({
           textTransform: "none",
           transition: "box-shadow 0.2s ease",
 
-          "&:hover": {
-            boxShadow: "inset 0 -2px 0 currentColor",
+          "&.nav-btn:hover, &.nav-btn.Mui-focusVisible": {
+            boxShadow: "inset 0 -2px 0 currentColor  ",
           },
           "&:focus": {
             outline: "none",
-          },
-
-          "&.Mui-focusVisible": {
-            boxShadow: "inset 0 -2px 0 currentColor",
           },
         },
       },

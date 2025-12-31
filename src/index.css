@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap');
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -28,4 +28,12 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* custom fonts */
+
+@font-face {
+  font-family: "MonteCarlo";
+  src: url("/public/fonts/customization/MonteCarlo-Regular.ttf")
+    format("truetype");
 }
