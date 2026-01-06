@@ -34,6 +34,6 @@ button:focus-visible {
 
 @font-face {
   font-family: "MonteCarlo";
-  src: url("/public/fonts/customization/MonteCarlo-Regular.ttf")
+  src: url("/public/fonts/custmaized/MonteCarlo-Regular.ttf")
     format("truetype");
 }

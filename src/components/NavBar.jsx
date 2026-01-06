@@ -1,4 +1,4 @@
-// grid
+// grid import
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
@@ -6,15 +6,14 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 
-// icons
+// icons import
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SearchIcon from "@mui/icons-material/Search";
 
-// themes
-
+// themes import
 import { useColorScheme } from "@mui/material/styles";
 
 export default function NavBar() {
