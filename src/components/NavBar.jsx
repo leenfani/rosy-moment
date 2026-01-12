@@ -1,23 +1,22 @@
-// grid import
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+// MUI Components
+import { Box, Grid, Button, InputBase, useColorScheme } from "@mui/material";
 
-// btn
-import Button from "@mui/material/Button";
-import InputBase from "@mui/material/InputBase";
-
-// icons import
+// MUI Icons
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SearchIcon from "@mui/icons-material/Search";
 
-// themes import
-import { useColorScheme } from "@mui/material/styles";
+// Custom Components & Hooks
+import AuthDialog from "./AuthDialog";
+import { useState } from "react";
 
 export default function NavBar() {
-  // set mood
+  const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+
+  // Set Theme Mode With handleToggle
+
   const { mode, setMode } = useColorScheme();
   const isDarkMode = mode === "dark";
   const handleToggle = () => {
@@ -85,14 +84,27 @@ export default function NavBar() {
             justifyItems="flex-end"
             className="text-white"
           >
-            <Button key="login" className="nav-btn">
+            {/* Authentication */}
+
+            <Button
+              className="nav-btn"
+              onClick={() => setIsAuthDialogOpen(true)}
+            >
               <PersonIcon fontSize="large" />
               Login
             </Button>
 
+            {/* ==Authentication== */}
+
+            {/* shopping cart */}
+
             <Button key="shoppingcart" className="nav-btn">
               <ShoppingCartIcon fontSize="large" />
             </Button>
+
+            {/* ==shopping cart== */}
+
+            {/* change mode */}
 
             <Button onClick={handleToggle} className="nav-btn">
               {isDarkMode ? (
@@ -101,11 +113,19 @@ export default function NavBar() {
                 <LightModeIcon fontSize="large" />
               )}
             </Button>
+
+            {/* ==change mode== */}
           </Grid>
 
           {/* ==icons== */}
         </Grid>
       </Box>
+
+      {/* Passing Props */}
+      <AuthDialog
+        open={isAuthDialogOpen}
+        onClose={() => setIsAuthDialogOpen(false)}
+      />
     </Box>
   );
 }
