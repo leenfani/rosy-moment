@@ -9,11 +9,11 @@ export const initialAuthState = {
     dateOfBirth: null,
   },
   errors: {},
-  // toast: {
-  //   open: false,
-  //   message: "",
-  //   severity: "success",
-  // },
+  toast: {
+    open: false,
+    message: "",
+    severity: "success",
+  },
   authMode: "signup",
   showPassword: false,
   isFormValid: false,

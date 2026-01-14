@@ -22,9 +22,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { useAuthForm } from "../customHooks/useAuthForm";
 
+import { AuthToastSuccess } from "../toasts/AuthToastSuccess";
+
 export default function AuthDialog({ open, onClose }) {
-  const { state, setField, submit, togglePassword, toggleAuthMode } =
-    useAuthForm();
+  const {
+    state,
+    setField,
+    submit,
+    togglePassword,
+    toggleAuthMode,
+    toastProps,
+  } = useAuthForm();
   const { authMode, showPassword, formData, errors } = state;
 
   return (
@@ -202,6 +210,8 @@ export default function AuthDialog({ open, onClose }) {
           </Box>
         </form>
       </Box>
+      {/* auth toast */}
+      <AuthToastSuccess {...toastProps} />
     </Dialog>
   );
 }

@@ -64,6 +64,7 @@ export function AuthReducer(state, action) {
         ...state,
         errors: errors,
         isFormValid: Object.keys(errors).length === 0,
+        isSubmitting: true,
       };
     }
     case "SHOW_SUCCESS_TOAST":
@@ -77,6 +78,12 @@ export function AuthReducer(state, action) {
               : "Login successfully!",
           severity: "success",
         },
+        isSubmitting: false,
+      };
+    case "CLOSE_TOAST":
+      return {
+        ...state,
+        toast: { ...state.toast, open: false },
       };
 
     default:
