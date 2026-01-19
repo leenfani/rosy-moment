@@ -1,5 +1,12 @@
 // MUI Components
-import { Box, Grid, Button, InputBase, useColorScheme } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Button,
+  InputBase,
+  useColorScheme,
+  Typography,
+} from "@mui/material";
 
 // MUI Icons
 import PersonIcon from "@mui/icons-material/Person";
@@ -29,47 +36,79 @@ export default function NavBar() {
   return (
     <Box
       component="nav"
-      className=" p-7"
       sx={{
         bgcolor: "primary.main",
+        p: 2,
       }}
     >
       <Box
         sx={{
           flexGrow: 1,
+          mr: 1,
+          ml: 1,
         }}
       >
         <Grid container>
           {/* logo */}
 
           <Grid size={4}>
-            <h1
-              style={{ fontFamily: "MonteCarlo" }}
-              className="text-5xl text-white"
+            <Typography
+              sx={{
+                fontFamily: "MonteCarlo",
+                fontSize: "50px",
+                color: (theme) => theme.palette.common.white,
+              }}
             >
               Rosy Moment
-            </h1>
+            </Typography>
           </Grid>
 
           {/* ===logo=== */}
 
           {/* search bar */}
 
-          <Grid size={4} className="mt-3 !text-white flex justify-center">
-            <div className="border-1 pl-3 w-fit">
+          <Grid
+            size={4}
+            sx={{
+              mt: 3,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                border: "1px solid",
+                borderColor: "common.white",
+                pl: 2,
+                mb: 1,
+                height: "40px",
+              }}
+            >
               <InputBase
-                className="w-100 !text-white"
                 placeholder="What are you looking for?"
                 inputProps={{ "aria-label": "search" }}
+                sx={{
+                  color: "common.white",
+                  width: 400,
+                }}
               />
 
               <Button
                 aria-label="search"
-                className="!border-l-1 hover:!border-white"
+                sx={{
+                  borderLeft: "1px solid",
+                  borderColor: "common.white",
+                  color: "common.white",
+                  "&:hover": {
+                    borderColor: "common.white",
+                  },
+                }}
               >
                 <SearchIcon />
               </Button>
-            </div>
+            </Box>
           </Grid>
 
           {/* ===search bar=== */}
@@ -82,14 +121,11 @@ export default function NavBar() {
             size={4}
             flexDirection="row-reverse"
             justifyItems="flex-end"
-            className="text-white"
+            sx={{ color: "common.white" }}
           >
             {/* Authentication */}
 
-            <Button
-              className="nav-btn"
-              onClick={() => setIsAuthDialogOpen(true)}
-            >
+            <Button color="inherit" onClick={() => setIsAuthDialogOpen(true)}>
               <PersonIcon fontSize="large" />
               Login
             </Button>
@@ -98,7 +134,7 @@ export default function NavBar() {
 
             {/* shopping cart */}
 
-            <Button key="shoppingcart" className="nav-btn">
+            <Button key="shoppingcart" color="inherit">
               <ShoppingCartIcon fontSize="large" />
             </Button>
 
@@ -106,7 +142,7 @@ export default function NavBar() {
 
             {/* change mode */}
 
-            <Button onClick={handleToggle} className="nav-btn">
+            <Button onClick={handleToggle} color="inherit">
               {isDarkMode ? (
                 <DarkModeIcon fontSize="large" />
               ) : (
