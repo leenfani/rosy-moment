@@ -13,6 +13,7 @@ export const Themes = createTheme({
         background: {
           default: "#ffffff",
         },
+        secondary: { main: "#c942ab" },
         text: {
           primary: "#000000",
         },
@@ -27,9 +28,9 @@ export const Themes = createTheme({
           default: "#121212",
           paper: "#1e1e1e",
         },
+        secondary: { main: "#a6378d" },
         text: {
           primary: "#ffffff",
-          secondary: "rgba(255,255,255,0.7)",
         },
       },
     },

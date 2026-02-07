@@ -6,6 +6,7 @@ import {
   InputBase,
   useColorScheme,
   Typography,
+  Badge,
 } from "@mui/material";
 
 // MUI Icons
@@ -135,7 +136,14 @@ export default function NavBar() {
             {/* shopping cart */}
 
             <Button key="shoppingcart" color="inherit">
-              <ShoppingCartIcon fontSize="large" />
+              <Badge
+                badgeContent={0}
+              
+                color="secondary"
+                showZero
+              >
+                <ShoppingCartIcon fontSize="large" />
+              </Badge>
             </Button>
 
             {/* ==shopping cart== */}
