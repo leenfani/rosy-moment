@@ -1,3 +1,5 @@
+// React router
+import { Link } from "react-router-dom";
 // MUI Components
 import {
   Box,
@@ -136,14 +138,11 @@ export default function NavBar() {
             {/* shopping cart */}
 
             <Button key="shoppingcart" color="inherit">
-              <Badge
-                badgeContent={0}
-              
-                color="secondary"
-                showZero
-              >
-                <ShoppingCartIcon fontSize="large" />
-              </Badge>
+              <Link to={"/Cart"}>
+                <Badge badgeContent={0} color="secondary" showZero>
+                  <ShoppingCartIcon fontSize="large" />
+                </Badge>
+              </Link>
             </Button>
 
             {/* ==shopping cart== */}
