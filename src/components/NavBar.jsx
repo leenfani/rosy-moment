@@ -56,6 +56,8 @@ export default function NavBar() {
 
           <Grid size={4}>
             <Typography
+              component={Link}
+              to="/"
               sx={{
                 fontFamily: "MonteCarlo",
                 fontSize: "50px",
