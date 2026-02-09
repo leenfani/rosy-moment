@@ -137,12 +137,15 @@ export default function NavBar() {
 
             {/* shopping cart */}
 
-            <Button key="shoppingcart" color="inherit">
-              <Link to={"/Cart"}>
-                <Badge badgeContent={0} color="secondary" showZero>
-                  <ShoppingCartIcon fontSize="large" />
-                </Badge>
-              </Link>
+            <Button
+              key="shoppingcart"
+              color="inherit"
+              component={Link}
+              to="/Cart"
+            >
+              <Badge badgeContent={0} color="secondary" showZero>
+                <ShoppingCartIcon fontSize="large" />
+              </Badge>
             </Button>
 
             {/* ==shopping cart== */}
