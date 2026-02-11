@@ -9,6 +9,7 @@ import {
   useColorScheme,
   Typography,
   Badge,
+  Stack,
 } from "@mui/material";
 
 // MUI Icons
@@ -42,91 +43,98 @@ export default function NavBar() {
       sx={{
         bgcolor: "primary.main",
         p: 2,
+        flexGrow: 1,
+        pl: 3,
+        pr: 3,
       }}
     >
-      <Box
-        sx={{
-          flexGrow: 1,
-          mr: 1,
-          ml: 1,
-        }}
-      >
-        <Grid container>
-          {/* logo */}
+      <Grid container spacing={1}>
+        {/* logo */}
 
-          <Grid size={4}>
-            <Typography
-              component={Link}
-              to="/"
-              sx={{
-                fontFamily: "MonteCarlo",
-                fontSize: "50px",
-                color: (theme) => theme.palette.common.white,
-              }}
-            >
-              Rosy Moment
-            </Typography>
-          </Grid>
-
-          {/* ===logo=== */}
-
-          {/* search bar */}
-
-          <Grid
-            size={4}
+        <Grid size={{ xs: 12, sm: 7.5, md: 5, lg: 4 }}>
+          <Typography
+            component={Link}
+            to="/"
             sx={{
-              mt: 3,
-              display: "flex",
-              justifyContent: "center",
+              display: "block",
+              textAlign: { xs: "center", sm: "left" },
+              fontFamily: "MonteCarlo",
+              fontSize: "50px",
+              color: (theme) => theme.palette.common.white,
             }}
           >
-            <Box
+            Rosy Moment
+          </Typography>
+        </Grid>
+
+        {/* ===logo=== */}
+
+        {/* search bar */}
+
+        <Grid
+          size={{ xs: 12, sm: 3, md: 3, lg: 4 }}
+          sx={{
+            mt: 3,
+            pr: "1px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              border: "1px solid",
+              borderColor: "common.white",
+              pl: 2,
+              mb: 1,
+              height: "40px",
+            }}
+          >
+            <InputBase
+              placeholder="What are you looking for?"
+              inputProps={{ "aria-label": "search" }}
               sx={{
-                display: "flex",
-                alignItems: "center",
-                border: "1px solid",
-                borderColor: "common.white",
-                pl: 2,
-                mb: 1,
-                height: "40px",
+                color: "common.white",
+                width: {
+                  xs: "200px",
+                  sm: "200px",
+                  md: "280px",
+                  lg: "400px",
+                },
+              }}
+            />
+
+            <Button
+              aria-label="search"
+              sx={{
+                borderLeft: "1px solid",
+
+                "&:hover": {
+                  borderColor: "common.white",
+                },
               }}
             >
-              <InputBase
-                placeholder="What are you looking for?"
-                inputProps={{ "aria-label": "search" }}
-                sx={{
-                  color: "common.white",
-                  width: 400,
-                }}
-              />
+              <SearchIcon />
+            </Button>
+          </Box>
+        </Grid>
 
-              <Button
-                aria-label="search"
-                sx={{
-                  borderLeft: "1px solid",
-                  borderColor: "common.white",
-                  color: "common.white",
-                  "&:hover": {
-                    borderColor: "common.white",
-                  },
-                }}
-              >
-                <SearchIcon />
-              </Button>
-            </Box>
-          </Grid>
+        {/* ===search bar=== */}
 
-          {/* ===search bar=== */}
+        {/* icons */}
 
-          {/* icons */}
-
-          <Grid
-            container
-            spacing={1}
-            size={4}
+        <Grid
+          container
+          spacing={1}
+          size={{ xs: 12, sm: 12, md: 4, lg: 4 }}
+          justifyContent={{ xs: "center", sm: "center", md: "flex-end" }}
+        >
+          <Stack
             flexDirection="row-reverse"
-            justifyItems="flex-end"
-            sx={{ color: "common.white" }}
+            sx={{
+              color: "common.white",
+            }}
           >
             {/* Authentication */}
 
@@ -163,11 +171,11 @@ export default function NavBar() {
             </Button>
 
             {/* ==change mode== */}
-          </Grid>
-
-          {/* ==icons== */}
+          </Stack>
         </Grid>
-      </Box>
+
+        {/* ==icons== */}
+      </Grid>
 
       {/* Passing Props */}
       <AuthDialog
