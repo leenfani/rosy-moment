@@ -109,9 +109,10 @@ export default function NavBar() {
               aria-label="search"
               sx={{
                 borderLeft: "1px solid",
-
+                color: "common.white",
                 "&:hover": {
                   borderColor: "common.white",
+                  color: "common.white",
                 },
               }}
             >
