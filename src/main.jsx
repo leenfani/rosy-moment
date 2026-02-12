@@ -5,15 +5,19 @@ import App from "./App.jsx";
 import { MyThemeProvider } from "./providers/MyThemeProvider.jsx";
 import { AuthProvider } from "./providers/AuthProvider.jsx";
 import { BrowserRouter } from "react-router-dom";
+import { store } from "storeProducts/store";
+import { Provider } from "react-redux";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <MyThemeProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </MyThemeProvider>
-    </BrowserRouter>
-  </StrictMode>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <MyThemeProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </MyThemeProvider>
+      </BrowserRouter>
+    </Provider>
+  </StrictMode>
 );
