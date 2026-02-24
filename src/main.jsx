@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { MyThemeProvider } from "./providers/MyThemeProvider.jsx";
 import { AuthProvider } from "./providers/AuthProvider.jsx";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "storeProducts/store";
+import { store } from "../src/storeProducts/store";
 import { Provider } from "react-redux";
 
 createRoot(document.getElementById("root")).render(
@@ -19,5 +19,5 @@ createRoot(document.getElementById("root")).render(
         </MyThemeProvider>
       </BrowserRouter>
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );
