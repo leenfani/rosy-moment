@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// import required modules
+// Import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import { useTheme } from "@mui/material/styles";
@@ -74,8 +74,6 @@ export default function HeroSwiper() {
         clickable: true,
       }}
       className="HeroSwiper"
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
     >
       {slidesData.map((slide) => (
         <SwiperSlide key={slide.id}>
