@@ -1,26 +1,32 @@
-// Import Swiper React components
+// Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
+// Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// Import required modules
+// required modules
 import { Pagination, Navigation } from "swiper/modules";
 
-import { useTheme } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+// MUI
+import {
+  useTheme,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+} from "@mui/material";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import ShowSkeleton from "./components/skeleton";
 
-// Import Redux
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFlowerBouqet } from "./products/flowerBouquetSlice";
 
+// React
 import { useEffect } from "react";
 
 export default function FlowerBouquetSwiper() {
@@ -37,7 +43,7 @@ export default function FlowerBouquetSwiper() {
   if (status === "failed") {
     return (
       <Typography color="error" align="center">
-        Error: {error}
+        {error} <SentimentVeryDissatisfiedIcon />
       </Typography>
     );
   }
@@ -68,104 +74,116 @@ export default function FlowerBouquetSwiper() {
       }}
       className="HeroSwiper"
     >
-      {items.map((photo) => (
+      {status === "loading" ? (
         <SwiperSlide
-          key={photo.id}
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Card
-            sx={{
-              width: { xs: "80%", md: "60%" },
-              height: "800px",
+          <ShowSkeleton />
+        </SwiperSlide>
+      ) : (
+        items.map((photo) => (
+          <SwiperSlide
+            key={photo.id}
+            style={{
               display: "flex",
-              flexDirection: "column",
-              borderRadius: "40px",
-              overflow: "hidden",
-              boxShadow: "0px 20px 40px  rgba(0,0,0,0.4)",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <CardMedia
-              component="img"
+            <Card
               sx={{
-                height: "70%",
-                width: "100%",
-                objectFit: "cover",
-                objectPosition: "center",
-                backgroundColor: theme.palette.background.paper,
-              }}
-              image={photo.src.large2x}
-              title="green iguana"
-            />
-            <CardContent
-              sx={{
-                width: "90%",
-                height: "5px",
-                flexGrow: 1,
-                gap: 1,
+                width: { xs: "80%", md: "60%" },
+                height: "800px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
+                borderRadius: "40px",
+                overflow: "hidden",
+                boxShadow: "0px 20px 40px  rgba(0,0,0,0.4)",
               }}
             >
-              <Typography
+              <CardMedia
+                component="img"
                 sx={{
-                  fontFamily: "Montserrat",
-                  pt: "135px",
-                  fontSize: { xs: "1.8rem", md: "2.2rem" },
+                  height: "70%",
+                  width: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  backgroundColor: theme.palette.background.paper,
+                }}
+                image={photo.src.large2x}
+                title="green iguana"
+              />
+              <CardContent
+                sx={{
+                  width: "90%",
+                  height: "5px",
+                  flexGrow: 1,
+                  gap: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
                 }}
               >
-                {photo.alt || "Beautiful Bouquet"}
-              </Typography>
-            </CardContent>
-            <CardActions
-              sx={{
-                justifyContent: "space-between",
-                px: { xs: 2, md: 6 },
-                pb: 4,
-              }}
-            >
-              <Typography
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    pt: "135px",
+                    fontSize: { xs: "1.8rem", md: "2.2rem" },
+                  }}
+                >
+                  {photo.alt || "Beautiful Bouquet"}
+                </Typography>
+              </CardContent>
+              <CardActions
                 sx={{
-                  fontSize: { xs: "1.9rem", md: "2.5rem" },
-                  fontFamily: "MonteCarlo",
-                  pt: "110px",
-                  fontWeight: "bold",
+                  justifyContent: "space-between",
+                  px: { xs: 2, md: 6 },
+                  pb: 4,
                 }}
               >
-                $59
-              </Typography>
-              <Button
-                size="large"
-                sx={{
-                  mt: 13,
-                  backgroundColor: "transparent",
-                  border: `2px solid ${theme.palette.primary.main}`,
-                  padding: "8px 20px",
-                  cursor: "pointer",
-                  borderRadius: "20px",
-                  fontFamily: "Montserrat",
-                  fontSize: { xs: "1.2rem", md: "1.5rem" },
-                  transition: "0.3s",
-                  "&:hover": {
-                    backgroundColor: theme.palette.primary.main,
-                    transform: "scale(1.05)",
-                    border: `2px solid white`,
-                    color: "#FCFBF4",
-                  },
-                }}
-              >
-                Add To Cart
-              </Button>
-            </CardActions>
-          </Card>
-        </SwiperSlide>
-      ))}
+                <Typography
+                  sx={{
+                    fontSize: { xs: "1.9rem", md: "2.5rem" },
+                    fontFamily: "MonteCarlo",
+                    pt: "110px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  $59
+                </Typography>
+                <Button
+                  size="large"
+                  sx={{
+                    mt: 13,
+                    backgroundColor: "transparent",
+                    border: `2px solid ${theme.palette.primary.main}`,
+                    padding: "8px 20px",
+                    cursor: "pointer",
+                    borderRadius: "20px",
+                    fontFamily: "Montserrat",
+                    fontSize: { xs: "1.2rem", md: "1.5rem" },
+                    transition: "0.3s",
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.main,
+                      transform: "scale(1.05)",
+                      border: `2px solid white`,
+                      color: "#FCFBF4",
+                    },
+                  }}
+                >
+                  Add To Cart
+                </Button>
+              </CardActions>
+            </Card>
+          </SwiperSlide>
+        ))
+      )}
     </Swiper>
   );
 }

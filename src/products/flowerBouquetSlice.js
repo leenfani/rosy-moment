@@ -14,7 +14,6 @@ export const fetchFlowerBouqet = createAsyncThunk(
         },
       },
     );
-    console.log("response", response.data.photos)
     return response.data.photos;
   },
 );
