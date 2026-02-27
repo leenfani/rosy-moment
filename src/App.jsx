@@ -1,5 +1,6 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
+import Footer from "./Footer";
 import { Route, Routes } from "react-router-dom";
 import Cart from "./cart/Cart";
 import Home from "./Home";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
       </Routes>
       <CartToastSuccess />
+      <Footer/>
     </>
   );
 }
