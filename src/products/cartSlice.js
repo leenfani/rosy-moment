@@ -40,7 +40,7 @@ export const cartSlice = createSlice({
         state.cartItems.push({
           id: item.id,
           title: item.title || item.alt,
-          image: item.src.large2x,
+          image: item.src?.large2x || item.thumbnail,
           price: productPrice,
           quantity: 1,
         });
