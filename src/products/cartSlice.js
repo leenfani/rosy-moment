@@ -1,9 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const DEFAULT_STATE = {
   cartItems: [],
   totalQuantity: 0,
   totalPrice: 0,
+};
+
+const loadCartFromStorage = () => {
+  try {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart === null) return DEFAULT_STATE;
+
+    return { ...DEFAULT_STATE, ...JSON.parse(savedCart) };
+  } catch (err) {
+    return DEFAULT_STATE;
+  }
+};
+
+const initialState = loadCartFromStorage();
+
+const saveCartToStorage = (state) => {
+  localStorage.setItem("cart", JSON.stringify(state));
 };
 
 export const cartSlice = createSlice({
@@ -12,6 +29,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;
+      const productPrice = item.price || 59;
 
       const existingItem = state.cartItems.find(
         (product) => product.id === item.id,
@@ -23,13 +41,15 @@ export const cartSlice = createSlice({
           id: item.id,
           title: item.alt,
           image: item.src.large2x,
-          price: 59,
+          price: productPrice,
           quantity: 1,
         });
       }
 
       state.totalQuantity += 1;
-      state.totalPrice += 59;
+      state.totalPrice += productPrice;
+
+      saveCartToStorage(state);
     },
 
     increaseQuantity: (state, action) => {
@@ -42,6 +62,8 @@ export const cartSlice = createSlice({
       existingItem.quantity += 1;
       state.totalQuantity += 1;
       state.totalPrice += existingItem.price;
+
+      saveCartToStorage(state);
     },
 
     decreaseQuantity: (state, action) => {
@@ -63,6 +85,8 @@ export const cartSlice = createSlice({
           (product) => product.id !== id,
         );
       }
+
+      saveCartToStorage(state);
     },
   },
 });
