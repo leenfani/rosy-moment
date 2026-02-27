@@ -1,5 +1,6 @@
 // React router
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // MUI Components
 import {
   Box,
@@ -22,6 +23,8 @@ import SearchIcon from "@mui/icons-material/Search";
 // Custom Components & Hooks
 import AuthDialog from "./AuthDialog";
 import { useState } from "react";
+import { useSearch } from "../customHooks/useSearch";
+import SearchSuggestions from "../SearchSuggestions";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -29,9 +32,15 @@ import { useSelector } from "react-redux";
 export default function NavBar() {
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
 
-// Reading the items quantity from the cart slice
+  // Reading the items quantity from the cart slice
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-
+  const { searchTerm, setSearchTerm, suggestions } = useSearch();
+  // handle search
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return;
+    navigate(`/search?q=${searchTerm}`);
+  };
   // Set Theme Mode With handleToggle
 
   const { mode, setMode } = useColorScheme();
@@ -42,7 +51,6 @@ export default function NavBar() {
   if (!mode) {
     return <Box component="nav" />;
   }
-  
 
   return (
     <Box
@@ -94,6 +102,7 @@ export default function NavBar() {
               border: "1px solid",
               borderColor: "common.white",
               pl: 2,
+
               mb: 1,
               height: "40px",
             }}
@@ -110,9 +119,12 @@ export default function NavBar() {
                   lg: "400px",
                 },
               }}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchTerm}
             />
 
             <Button
+              onClick={handleSearch}
               aria-label="search"
               sx={{
                 borderLeft: "1px solid",
@@ -126,6 +138,7 @@ export default function NavBar() {
               <SearchIcon />
             </Button>
           </Box>
+          <SearchSuggestions suggestions={suggestions} />
         </Grid>
 
         {/* ===search bar=== */}
