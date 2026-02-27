@@ -20,7 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import ShowSkeleton from "./components/skeleton";
+import ShowSkeleton from "./components/Skeleton";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
