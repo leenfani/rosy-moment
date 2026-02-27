@@ -12,7 +12,7 @@ const loadCartFromStorage = () => {
     if (savedCart === null) return DEFAULT_STATE;
 
     return { ...DEFAULT_STATE, ...JSON.parse(savedCart) };
-  } catch (err) {
+  } catch {
     return DEFAULT_STATE;
   }
 };
@@ -39,7 +39,7 @@ export const cartSlice = createSlice({
       } else {
         state.cartItems.push({
           id: item.id,
-          title: item.alt,
+          title: item.title || item.alt,
           image: item.src.large2x,
           price: productPrice,
           quantity: 1,
