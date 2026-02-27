@@ -26,6 +26,7 @@ import ShowSkeleton from "./components/skeleton";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFlowerBouqet } from "./products/flowerBouquetSlice";
 import { addToCart } from "./products/cartSlice";
+import { showSnackbar } from "./products/uiSlice";
 
 // React
 import { useEffect } from "react";
@@ -75,7 +76,6 @@ export default function FlowerBouquetSwiper() {
       }}
       className="HeroSwiper"
     >
-
       {/* is loading case */}
 
       {status === "loading" ? (
@@ -98,9 +98,8 @@ export default function FlowerBouquetSwiper() {
               alignItems: "center",
             }}
           >
-
             {/* product card */}
-            
+
             <Card
               sx={{
                 width: { xs: "80%", md: "60%" },
@@ -139,7 +138,6 @@ export default function FlowerBouquetSwiper() {
               >
                 <Typography
                   sx={{
-                    
                     pt: "135px",
                     fontSize: { xs: "1.8rem", md: "2.2rem" },
                   }}
@@ -181,7 +179,15 @@ export default function FlowerBouquetSwiper() {
                       color: "#FCFBF4",
                     },
                   }}
-                  onClick={() => dispatch(addToCart(photo))}
+                  onClick={() => {
+                    dispatch(addToCart(photo));
+                    dispatch(
+                      showSnackbar({
+                        message: "Product added to cart!",
+                        severity: "success",
+                      }),
+                    );
+                  }}
                 >
                   Add To Cart
                 </Button>

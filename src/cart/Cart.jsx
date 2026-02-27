@@ -1,5 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { increaseQuantity, decreaseQuantity } from "../products/cartSlice";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+} from "../products/cartSlice";
 
 // MUI
 
@@ -16,6 +20,8 @@ import {
 
 import { Link } from "react-router-dom";
 
+import { showSnackbar } from "../products/uiSlice";
+
 export default function Cart() {
   const dispatch = useDispatch();
 
@@ -24,6 +30,19 @@ export default function Cart() {
   );
 
   const theme = useTheme();
+
+  // handle checkout
+
+  const handleCheckout = () => {
+    dispatch(
+      showSnackbar({
+        message: "Order placed successfully! we will message you by details",
+        severity: "success",
+      }),
+    );
+
+    dispatch(clearCart());
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -110,7 +129,15 @@ export default function Cart() {
           >
             <Button
               variant="outlined"
-              onClick={() => dispatch(decreaseQuantity(item.id))}
+              onClick={() => {
+                dispatch(decreaseQuantity(item.id));
+                dispatch(
+                  showSnackbar({
+                    message: "Product removed from cart!",
+                    severity: "success",
+                  }),
+                );
+              }}
             >
               -
             </Button>
@@ -119,7 +146,15 @@ export default function Cart() {
 
             <Button
               variant="outlined"
-              onClick={() => dispatch(increaseQuantity(item.id))}
+              onClick={() => {
+                dispatch(increaseQuantity(item.id));
+                dispatch(
+                  showSnackbar({
+                    message: "Product added to cart!",
+                    severity: "success",
+                  }),
+                );
+              }}
             >
               +
             </Button>
@@ -136,7 +171,7 @@ export default function Cart() {
         <Typography variant="h5" fontWeight="bold">
           Total Price: ${totalPrice}
         </Typography>
-        <Button variant="contained" size="large">
+        <Button variant="contained" size="large" onClick={handleCheckout}>
           Checkout
         </Button>
       </Box>
