@@ -3,6 +3,9 @@ import { createTheme } from "@mui/material";
 export const Themes = createTheme({
   cssVariables: true,
   colorSchemeSelector: "class",
+  typography: {
+    fontFamily: "Montserrat",
+  },
 
   colorSchemes: {
     light: {

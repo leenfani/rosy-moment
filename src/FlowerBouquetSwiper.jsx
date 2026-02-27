@@ -25,6 +25,7 @@ import ShowSkeleton from "./components/skeleton";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFlowerBouqet } from "./products/flowerBouquetSlice";
+import { addToCart } from "./products/cartSlice";
 
 // React
 import { useEffect } from "react";
@@ -74,6 +75,9 @@ export default function FlowerBouquetSwiper() {
       }}
       className="HeroSwiper"
     >
+
+      {/* is loading case */}
+
       {status === "loading" ? (
         <SwiperSlide
           style={{
@@ -94,6 +98,9 @@ export default function FlowerBouquetSwiper() {
               alignItems: "center",
             }}
           >
+
+            {/* product card */}
+            
             <Card
               sx={{
                 width: { xs: "80%", md: "60%" },
@@ -132,7 +139,7 @@ export default function FlowerBouquetSwiper() {
               >
                 <Typography
                   sx={{
-                    fontFamily: "Montserrat",
+                    
                     pt: "135px",
                     fontSize: { xs: "1.8rem", md: "2.2rem" },
                   }}
@@ -150,7 +157,6 @@ export default function FlowerBouquetSwiper() {
                 <Typography
                   sx={{
                     fontSize: { xs: "1.9rem", md: "2.5rem" },
-                    fontFamily: "MonteCarlo",
                     pt: "110px",
                     fontWeight: "bold",
                   }}
@@ -166,7 +172,6 @@ export default function FlowerBouquetSwiper() {
                     padding: "8px 20px",
                     cursor: "pointer",
                     borderRadius: "20px",
-                    fontFamily: "Montserrat",
                     fontSize: { xs: "1.2rem", md: "1.5rem" },
                     transition: "0.3s",
                     "&:hover": {
@@ -176,6 +181,7 @@ export default function FlowerBouquetSwiper() {
                       color: "#FCFBF4",
                     },
                   }}
+                  onClick={() => dispatch(addToCart(photo))}
                 >
                   Add To Cart
                 </Button>

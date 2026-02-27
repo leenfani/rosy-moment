@@ -27,7 +27,6 @@ const slidesData = [
       "https://images.pexels.com/photos/32501973/pexels-photo-32501973.jpeg",
     title: "Share The Love With Our Special",
     subtitle: "Luxury Brands",
-    fontFamily: "Montserrat",
   },
   {
     id: 3,
@@ -35,7 +34,6 @@ const slidesData = [
       "https://images.pexels.com/photos/28252194/pexels-photo-28252194.jpeg",
     title: "Various Styles For Various Moments",
     subtitle: "",
-    fontFamily: "Montserrat",
   },
   {
     id: 4,
@@ -43,7 +41,6 @@ const slidesData = [
       "https://images.pexels.com/photos/34643008/pexels-photo-34643008.jpeg",
     title: "Feel The Warmth And The Sparkle",
     subtitle: "",
-    fontFamily: "Montserrat",
   },
 ];
 

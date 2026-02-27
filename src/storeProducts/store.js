@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import flowerBouquetSlice from "../products/flowerBouquetSlice";
+import flowerBouquetReducer from "../products/flowerBouquetSlice";
+import cartReducer from "../products/cartSlice";
 
 export const store = configureStore({
   reducer: {
-    flowerBouquet: flowerBouquetSlice,
+    flowerBouquet: flowerBouquetReducer,
+    cart: cartReducer,
   },
 });

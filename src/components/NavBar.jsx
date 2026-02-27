@@ -23,8 +23,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import AuthDialog from "./AuthDialog";
 import { useState } from "react";
 
+// Redux
+import { useSelector } from "react-redux";
+
 export default function NavBar() {
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
+
+// Reading the items quantity from the cart slice
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   // Set Theme Mode With handleToggle
 
@@ -36,6 +42,7 @@ export default function NavBar() {
   if (!mode) {
     return <Box component="nav" />;
   }
+  
 
   return (
     <Box
@@ -154,7 +161,7 @@ export default function NavBar() {
               component={Link}
               to="/Cart"
             >
-              <Badge badgeContent={0} color="secondary" showZero>
+              <Badge badgeContent={totalQuantity} color="secondary" showZero>
                 <ShoppingCartIcon fontSize="large" />
               </Badge>
             </Button>
