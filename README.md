@@ -200,6 +200,7 @@ Install dependencies:
 
 npm install
 
-Run development server:
+## Author
 
-npm run dev
+Leen Fani
+Frontend Developer
