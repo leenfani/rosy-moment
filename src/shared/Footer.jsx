@@ -7,7 +7,8 @@ export default function Footer() {
   return (
     <Box
       sx={{
-        minHeight: "200px",
+         marginTop: "auto",
+        minHeight: "171px",
         width: "100%",
         display: "flex",
         flexDirection: "column",
@@ -85,7 +86,7 @@ export default function Footer() {
         </Box>
         <Box
           component="a"
-          href="https://www.linkedin.com/in/leen-fani-6763903b4/"
+          href="https://www.linkedin.com/in/leen-fani-6763903b4/?locale=en_US"
           target="_blank"
           rel="noopener noreferrer"
           sx={{
