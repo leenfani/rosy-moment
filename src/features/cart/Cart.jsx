@@ -1,9 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import {
-  increaseQuantity,
-  decreaseQuantity,
-  clearCart,
-} from "../products/cartSlice";
+import { increaseQuantity, decreaseQuantity, clearCart } from "./cartSlice";
 
 // MUI
 
@@ -20,7 +16,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-import { showSnackbar } from "../products/uiSlice";
+import { showSnackbar } from "../../shared/uiSlice";
 
 export default function Cart() {
   const dispatch = useDispatch();

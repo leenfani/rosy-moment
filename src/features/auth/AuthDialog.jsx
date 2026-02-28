@@ -20,9 +20,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import { useAuthForm } from "../customHooks/useAuthForm";
+import { useAuthForm } from "./customHooksAuth/useAuthForm";
 
-import { AuthToastSuccess } from "../toasts/AuthToastSuccess";
+import { AuthToastSuccess } from "./AuthToastSuccess";
 
 export default function AuthDialog({ open, onClose }) {
   const {

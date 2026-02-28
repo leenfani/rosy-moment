@@ -21,10 +21,10 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import SearchIcon from "@mui/icons-material/Search";
 
 // Custom Components & Hooks
-import AuthDialog from "./AuthDialog";
+import AuthDialog from "../features/auth/AuthDialog";
 import { useState } from "react";
-import { useSearch } from "../customHooks/useSearch";
-import SearchSuggestions from "../SearchSuggestions";
+import { useSearch } from "../features/search/customHooksSearch/useSearch";
+import SearchSuggestions from "../features/search/SearchSuggestions";
 
 // Redux
 import { useSelector } from "react-redux";

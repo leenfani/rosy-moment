@@ -1,11 +1,11 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
-import Footer from "./Footer";
+import NavBar from "./shared/NavBar";
+import Footer from "./shared/Footer";
 import { Route, Routes } from "react-router-dom";
-import Cart from "./cart/Cart";
-import Home from "./Home";
-import SearchResult from "./SearchResult";
-import { CartToastSuccess } from "./toasts/CartToastSuccess";
+import Cart from "./features/cart/Cart";
+import Home from "./UI/Home";
+import SearchResult from "./features/search/SearchResult";
+import { CartToastSuccess } from "./features/cart/CartToastSuccess";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
       </Routes>
       <CartToastSuccess />
-      <Footer/>
+      <Footer />
     </>
   );
 }

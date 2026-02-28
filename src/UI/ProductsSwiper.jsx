@@ -1,15 +1,8 @@
-// Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-// required modules
 import { Pagination, Navigation } from "swiper/modules";
-
-// MUI
 import {
   useTheme,
   Card,
@@ -20,27 +13,28 @@ import {
   Typography,
 } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-import ShowSkeleton from "./components/Skeleton";
-
-// Redux
+import ShowSkeleton from "../shared/Skeleton";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchFlowerBouqet } from "./products/flowerBouquetSlice";
-import { addToCart } from "./products/cartSlice";
-import { showSnackbar } from "./products/uiSlice";
-
-// React
+import { fetchProducts } from "../features/products/productsSlice";
+import { addToCart } from "../features/cart/cartSlice";
+import { showSnackbar } from "../shared/uiSlice";
 import { useEffect } from "react";
 
-export default function FlowerBouquetSwiper() {
+export default function ProductsSwiper({ type }) {
   const dispatch = useDispatch();
-  const { items, status, error } = useSelector((state) => state.flowerBouquet);
   const theme = useTheme();
+
+  const { jewelry, watches, status, error } = useSelector(
+    (state) => state.products,
+  );
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchFlowerBouqet());
+      dispatch(fetchProducts());
     }
   }, [status, dispatch]);
+
+  const items = (type === "jewelry" ? jewelry : watches) || [];
 
   if (status === "failed") {
     return (
@@ -55,29 +49,17 @@ export default function FlowerBouquetSwiper() {
       style={{
         "--swiper-navigation-color": theme.palette.primary.main,
         "--swiper-pagination-color": theme.palette.primary.main,
-        overflow: "hidden",
         paddingBottom: "30px",
         height: "850px",
         "--swiper-navigation-size": "35px",
-        "--swiper-navigation-sides-offset": "5px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
       }}
-      loading="lazy"
-      centeredSlides={true}
       navigation={true}
       slidesPerView={1}
       spaceBetween={30}
       loop={true}
       modules={[Pagination, Navigation]}
-      pagination={{
-        clickable: true,
-      }}
-      className="HeroSwiper"
+      pagination={{ clickable: true }}
     >
-      {/* is loading case */}
-
       {status === "loading" ? (
         <SwiperSlide
           style={{
@@ -89,17 +71,15 @@ export default function FlowerBouquetSwiper() {
           <ShowSkeleton />
         </SwiperSlide>
       ) : (
-        items.map((photo) => (
+        items.map((product) => (
           <SwiperSlide
-            key={photo.id}
+            key={product.id}
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            {/* product card */}
-
             <Card
               sx={{
                 width: { xs: "80%", md: "60%" },
@@ -107,42 +87,36 @@ export default function FlowerBouquetSwiper() {
                 display: "flex",
                 flexDirection: "column",
                 borderRadius: "40px",
-                overflow: "hidden",
-                boxShadow: "0px 20px 40px  rgba(0,0,0,0.4)",
+                boxShadow: "0px 20px 40px rgba(0,0,0,0.4)",
               }}
             >
               <CardMedia
                 component="img"
                 sx={{
                   height: "70%",
-                  width: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  backgroundColor: theme.palette.background.paper,
+                  objectFit: "contain",
+                  bgcolor: "#f9f9f9",
+                  p: 2,
                 }}
-                image={photo.src.large2x}
-                title="green iguana"
+                image={product.thumbnail}
+                title={product.title}
               />
               <CardContent
                 sx={{
-                  width: "90%",
-                  height: "5px",
                   flexGrow: 1,
-                  gap: 1,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  textAlign: "center",
                 }}
               >
                 <Typography
-                  sx={{
-                    pt: "135px",
-                    fontSize: { xs: "1.8rem", md: "2.2rem" },
-                  }}
+                  sx={{ fontSize: { xs: "1.8rem", md: "2.2rem" }, mt: 2 }}
                 >
-                  {photo.alt || "Beautiful Bouquet"}
+                  {product.title}
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  {product.brand} - {product.category.replace("-", " ")}
                 </Typography>
               </CardContent>
               <CardActions
@@ -155,16 +129,14 @@ export default function FlowerBouquetSwiper() {
                 <Typography
                   sx={{
                     fontSize: { xs: "1.9rem", md: "2.5rem" },
-                    pt: "110px",
                     fontWeight: "bold",
                   }}
                 >
-                  $59
+                  ${product.price}
                 </Typography>
                 <Button
                   size="large"
                   sx={{
-                    mt: 13,
                     backgroundColor: "transparent",
                     border: `2px solid ${theme.palette.primary.main}`,
                     padding: "8px 20px",
@@ -180,7 +152,7 @@ export default function FlowerBouquetSwiper() {
                     },
                   }}
                   onClick={() => {
-                    dispatch(addToCart(photo));
+                    dispatch(addToCart(product));
                     dispatch(
                       showSnackbar({
                         message: "Product added to cart!",

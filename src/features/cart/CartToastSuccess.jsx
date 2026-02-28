@@ -1,6 +1,6 @@
 import { Snackbar, Alert } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { hideSnackbar } from "../products/uiSlice";
+import { hideSnackbar } from "../../shared/uiSlice";
 
 export function CartToastSuccess() {
   const dispatch = useDispatch();

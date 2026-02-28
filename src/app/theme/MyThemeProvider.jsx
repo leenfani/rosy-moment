@@ -1,9 +1,9 @@
 import { useState, useMemo } from "react";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Themes } from "../components/Themes";
+import { Themes } from "./Themes";
 
-import { ColorModeContext } from "../contexts/ColorModeContext";
+import { ColorModeContext } from "./ColorModeContext";
 
 export const MyThemeProvider = ({ children }) => {
   const [mode, setMode] = useState("light");
@@ -14,7 +14,7 @@ export const MyThemeProvider = ({ children }) => {
         setMode((prev) => (prev === "light" ? "dark" : "light"));
       },
     }),
-    []
+    [],
   );
 
   return (

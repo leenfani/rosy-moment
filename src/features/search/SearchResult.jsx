@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "./products/cartSlice";
-import { showSnackbar } from "./products/uiSlice";
+import { addToCart } from "../cart/cartSlice";
+import { showSnackbar } from "../../shared/uiSlice";
 import { useEffect } from "react";
-import { fetchProducts } from "./products/productsSlice";
+import { fetchProducts } from "../products/productsSlice";
 import { useTheme } from "@mui/material";
 
 export default function SearchResult() {

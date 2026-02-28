@@ -140,18 +140,18 @@ No component handles logic outside its domain.
 ## Screenshots
 
 ### Home
-![Home](./screenshots/rosy-moment.homePage.png)
+![Home](./public/screenshots/rosy-moment.homePage.png)
 
 ### Products Slider
-![Sign Up](./screenshots/rosy-moment.signup.png)
-![Sign Up Success](./screenshots/rosy-moment.successSignUp.png)
+![Sign Up](./public/screenshots/rosy-moment.signup.png)
+![Sign Up Success](./public/screenshots/rosy-moment.successSignUp.png)
 
 ### Cart
-![Cart](./screenshots/rosy-moment.fullCart.png)
-![Cart](./screenshots/rosy-moment.emptyCartChecked.png)
+![Cart](./public/screenshots/rosy-moment.fullCart.png)
+![Cart](./public/screenshots/rosy-moment.emptyCartChecked.png)
 
 ### Search Results
-![Search](./screenshots/rosy-moment.searchWatch.png)
+![Search](./public/screenshots/rosy-moment.searchWatch.png)
 
 (Add your images inside a `screenshots` folder in the project root)
 

@@ -85,7 +85,7 @@ export default function Footer() {
         </Box>
         <Box
           component="a"
-          href="https://github.com/leenfani"
+          href="https://www.linkedin.com/in/leen-fani-6763903b4/"
           target="_blank"
           rel="noopener noreferrer"
           sx={{
