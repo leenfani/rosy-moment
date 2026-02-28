@@ -153,7 +153,6 @@ No component handles logic outside its domain.
 ### Search Results
 ![Search](./screenshots/rosy-moment.searchWatch.png)
 
-(Add your images inside a `screenshots` folder in the project root)
 
 ---
 
