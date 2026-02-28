@@ -204,7 +204,3 @@ npm install
 
 Leen Fani
 Frontend Developer
-
-Run development server:
-
-npm run dev
