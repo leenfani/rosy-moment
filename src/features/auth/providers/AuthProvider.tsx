@@ -3,7 +3,11 @@ import { AuthReducer } from "../reducer/AuthReducer";
 import { AuthContext } from "../context/AuthContext";
 import initialAuthState from "../context/InitialAuthState";
 
-export function AuthProvider({ children }) {
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
+export function AuthProvider({ children }: AuthProviderProps) {
   const [state, dispatch] = useReducer(AuthReducer, initialAuthState);
 
   return (

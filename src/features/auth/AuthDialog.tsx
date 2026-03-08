@@ -15,16 +15,18 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import CloseIcon from "@mui/icons-material/Close";
-
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
 import { useAuthForm } from "./customHooksAuth/useAuthForm";
-
 import { AuthToastSuccess } from "./AuthToastSuccess";
 
-export default function AuthDialog({ open, onClose }) {
+interface AuthDialogProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function AuthDialog({ open, onClose }: AuthDialogProps) {
   const {
     state,
     setField,
@@ -34,6 +36,13 @@ export default function AuthDialog({ open, onClose }) {
     toastProps,
   } = useAuthForm();
   const { authMode, showPassword, formData, errors } = state;
+
+  const modeLabel = authMode === "login" ? "Login" : "Sign Up";
+  const switchModeText =
+    authMode === "login"
+      ? "Don't have an account?"
+      : "Already have an account?";
+  const switchModeLabel = authMode === "login" ? "Sign Up" : "Login";
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -46,9 +55,7 @@ export default function AuthDialog({ open, onClose }) {
             alignItems="center"
             mb={3}
           >
-            <Typography variant="h6">
-              {authMode === "login" ? "Login" : "Sign Up"}
-            </Typography>
+            <Typography variant="h6">{modeLabel}</Typography>
             <IconButton onClick={onClose}>
               <CloseIcon />
             </IconButton>
@@ -165,51 +172,25 @@ export default function AuthDialog({ open, onClose }) {
           {/* Footer */}
           <Box mt={2}>
             <Button variant="contained" fullWidth size="large" onClick={submit}>
-              {authMode === "login" ? (
-                <label className="text-white"> Login </label>
-              ) : (
-                <label className="text-white"> Sign Up</label>
-              )}
+              {modeLabel}
             </Button>
           </Box>
 
           <Box mt={3} textAlign="center">
-            {authMode === "login" ? (
-              <Typography variant="body2">
-                Don't have an account?
-                <Button
-                  sx={{
-                    "&:hover": {
-                      color: "primary.main",
-                    },
-                  }}
-                  color="primary.main"
-                  variant="text"
-                  onClick={toggleAuthMode}
-                >
-                  Sign Up
-                </Button>
-              </Typography>
-            ) : (
-              <Typography variant="body2">
-                Already have an account?
-                <Button
-                  sx={{
-                    "&:hover": {
-                      color: "primary.main",
-                    },
-                  }}
-                  color="primary.main"
-                  variant="text"
-                  onClick={toggleAuthMode}
-                >
-                  Login
-                </Button>
-              </Typography>
-            )}
+            <Typography variant="body2">
+              {switchModeText}
+              <Button
+                sx={{ "&:hover": { color: "primary.main" } }}
+                variant="text"
+                onClick={toggleAuthMode}
+              >
+                {switchModeLabel}
+              </Button>
+            </Typography>
           </Box>
         </form>
       </Box>
+
       {/* auth toast */}
       <AuthToastSuccess {...toastProps} />
     </Dialog>

@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect, type SyntheticEvent} from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useEffect } from "react";
+import type { Dayjs } from "dayjs";
 
 export function useAuthForm() {
-  const { state, dispatch } = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
-  const setField = (field, value) => {
+  if (!context) {
+    throw new Error("useAuthForm must be used within AuthProvider");
+  }
+
+  const { state, dispatch } = context;
+
+  const setField = (field: string, value: string | Dayjs) => {
     dispatch({ type: "SET_FIELD", field, value });
   };
 
@@ -13,7 +19,7 @@ export function useAuthForm() {
 
   const toggleAuthMode = () => dispatch({ type: "TOGGLE_AUTH_MODE" });
 
-  const submit = (e) => {
+  const submit = (e?: SyntheticEvent) => {
     if (e) e.preventDefault();
     dispatch({ type: "VALIDATE_FORM" });
   };
@@ -24,9 +30,7 @@ export function useAuthForm() {
     }
   }, [state.isSubmitting, state.isFormValid, dispatch]);
 
-  const closeToast = () => {
-    dispatch({ type: "CLOSE_TOAST" });
-  };
+  const closeToast = () => dispatch({ type: "CLOSE_TOAST" });
 
   return {
     state,

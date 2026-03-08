@@ -1,4 +1,6 @@
-export function AuthReducer(state, action) {
+import type { AuthState, AuthAction } from "../../../types/index";
+
+export function AuthReducer(state: AuthState, action: AuthAction): AuthState {
   switch (action.type) {
     case "SET_FIELD":
       return {
@@ -24,7 +26,7 @@ export function AuthReducer(state, action) {
         errors: {},
       };
     case "VALIDATE_FORM": {
-      const errors = {};
+      const errors: Record<string, string> = {};
       const { formData, authMode } = state;
       const fieldsToValidate =
         authMode === "signup"
@@ -39,7 +41,7 @@ export function AuthReducer(state, action) {
           : ["email", "password"];
 
       fieldsToValidate.forEach((field) => {
-        if (!formData[field]) {
+        if (!formData[field as keyof typeof formData]) {
           errors[field] = "This field is required";
         }
       });
@@ -51,18 +53,22 @@ export function AuthReducer(state, action) {
       if (!errors.password) {
         if (formData.password.length < 8) {
           errors.password = "Password is short";
-        } else if (!/[!@#$%]/.test(formData.password)) {
-          errors.password = "Password must contain symbols (!@#$%)";
+        } else if (!/[!@#$%?]/.test(formData.password)) {
+          errors.password = "Password must contain symbols (!@#$%?)";
         }
       }
 
-      if (!errors.phoneNum && formData.phoneNum.length < 11) {
+      if (
+        authMode === "signup" &&
+        !errors.phoneNum &&
+        formData.phoneNum.length < 11
+      ) {
         errors.phoneNum = "Invalid phone number";
       }
 
       return {
         ...state,
-        errors: errors,
+        errors,
         isFormValid: Object.keys(errors).length === 0,
         isSubmitting: true,
       };

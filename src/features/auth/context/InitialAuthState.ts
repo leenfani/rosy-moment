@@ -1,4 +1,5 @@
-export const initialAuthState = {
+import type { AuthState } from "../../../types/index";
+export const initialAuthState: AuthState = {
   formData: {
     firstName: "",
     lastName: "",
@@ -19,4 +20,4 @@ export const initialAuthState = {
   isFormValid: false,
   isSubmitting: false,
 };
-export default initialAuthState
+export default initialAuthState;
