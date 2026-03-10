@@ -111,12 +111,11 @@ export default function ProductsSwiper({ type }) {
                 }}
               >
                 <Typography
-                  sx={{ fontSize: { xs: "1.8rem", md: "2.2rem" }, mt: 2 }}
+                  sx={{
+                    fontSize: { md: "1.2rem", lg: "1.5rem" },
+                  }}
                 >
-                  {product.title}
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  {product.brand} - {product.category.replace("-", " ")}
+                  {product.description}
                 </Typography>
               </CardContent>
               <CardActions
@@ -128,7 +127,7 @@ export default function ProductsSwiper({ type }) {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "1.9rem", md: "2.5rem" },
+                    fontSize: { xs: "1.2rem", md: "1.9rem" },
                     fontWeight: "bold",
                   }}
                 >
@@ -139,7 +138,7 @@ export default function ProductsSwiper({ type }) {
                   sx={{
                     backgroundColor: "transparent",
                     border: `2px solid ${theme.palette.primary.main}`,
-                    padding: "8px 20px",
+                    padding: "5px 20px",
                     cursor: "pointer",
                     borderRadius: "20px",
                     fontSize: { xs: "1.2rem", md: "1.5rem" },

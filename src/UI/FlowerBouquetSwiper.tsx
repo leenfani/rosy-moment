@@ -33,9 +33,7 @@ import { useEffect } from "react";
 
 export default function FlowerBouquetSwiper() {
   const dispatch = useAppDispatch();
-  const { items, status, error } = useAppSelector(
-    (state) => state.flowerBouquet,
-  );
+  const { items, status, error } = useAppSelector((state) => state.flowerBouquet);
   const theme = useTheme();
 
   useEffect(() => {
@@ -54,20 +52,19 @@ export default function FlowerBouquetSwiper() {
 
   return (
     <Swiper
-      style={
-        {
-          "--swiper-navigation-color": theme.palette.primary.main,
-          "--swiper-pagination-color": theme.palette.primary.main,
-          overflow: "hidden",
-          paddingBottom: "30px",
-          height: "850px",
-          "--swiper-navigation-size": "35px",
-          "--swiper-navigation-sides-offset": "5px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        } as React.CSSProperties
-      }
+      style={{
+        "--swiper-navigation-color": theme.palette.primary.main,
+        "--swiper-pagination-color": theme.palette.primary.main,
+        overflow: "hidden",
+        paddingBottom: "30px",
+        height: "850px",
+        "--swiper-navigation-size": "35px",
+        "--swiper-navigation-sides-offset": "5px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }as React.CSSProperties}
+      
       centeredSlides={true}
       navigation={true}
       slidesPerView={1}
@@ -142,8 +139,8 @@ export default function FlowerBouquetSwiper() {
               >
                 <Typography
                   sx={{
-                    pt: "135px",
-                    fontSize: { xs: "1.8rem", md: "2.2rem" },
+                    pt: 12,
+                    fontSize: { xs: "1.3rem", md: "1.7rem", lg: "2rem" },
                   }}
                 >
                   {photo.alt || "Beautiful Bouquet"}
@@ -158,8 +155,8 @@ export default function FlowerBouquetSwiper() {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "1.9rem", md: "2.5rem" },
-                    pt: "110px",
+                    fontSize: { xs: "1.9rem", md: "2.4rem" },
+                    pt: "100px",
                     fontWeight: "bold",
                   }}
                 >
@@ -171,7 +168,7 @@ export default function FlowerBouquetSwiper() {
                     mt: 13,
                     backgroundColor: "transparent",
                     border: `2px solid ${theme.palette.primary.main}`,
-                    padding: "8px 20px",
+                    padding: "5px 20px",
                     cursor: "pointer",
                     borderRadius: "20px",
                     fontSize: { xs: "1.2rem", md: "1.5rem" },
