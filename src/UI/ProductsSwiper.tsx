@@ -1,15 +1,8 @@
-// Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-// required modules
 import { Pagination, Navigation } from "swiper/modules";
-
-// MUI
 import {
   useTheme,
   Card,
@@ -21,26 +14,32 @@ import {
 } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import ShowSkeleton from "../shared/Skeleton";
-
-// Redux
-import { useSelector, useDispatch } from "react-redux";
-import { fetchFlowerBouqet } from "../features/products/flowerBouquetSlice";
+import { fetchProducts } from "../features/products/productsSlice";
 import { addToCart } from "../features/cart/cartSlice";
 import { showSnackbar } from "../shared/uiSlice";
-
-// React
 import { useEffect } from "react";
 
-export default function FlowerBouquetSwiper() {
-  const dispatch = useDispatch();
-  const { items, status, error } = useSelector((state) => state.flowerBouquet);
+import { useAppDispatch, useAppSelector } from "../app/redux-hooks";
+
+interface ProductsSwiperProps {
+  type: "jewellery" | "watches";
+}
+
+export default function ProductsSwiper({ type }: ProductsSwiperProps) {
+  const dispatch = useAppDispatch();
   const theme = useTheme();
+
+  const { jewellery, watches, status, error } = useAppSelector(
+    (state) => state.products,
+  );
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchFlowerBouqet());
+      dispatch(fetchProducts());
     }
   }, [status, dispatch]);
+
+  const items = (type === "jewellery" ? jewellery : watches) || [];
 
   if (status === "failed") {
     return (
@@ -52,32 +51,22 @@ export default function FlowerBouquetSwiper() {
 
   return (
     <Swiper
-      style={{
-        "--swiper-navigation-color": theme.palette.primary.main,
-        "--swiper-pagination-color": theme.palette.primary.main,
-        overflow: "hidden",
-        paddingBottom: "30px",
-        height: "850px",
-        "--swiper-navigation-size": "35px",
-        "--swiper-navigation-sides-offset": "5px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      loading="lazy"
-      centeredSlides={true}
+      style={
+        {
+          "--swiper-navigation-color": theme.palette.primary.main,
+          "--swiper-pagination-color": theme.palette.primary.main,
+          paddingBottom: "30px",
+          height: "850px",
+          "--swiper-navigation-size": "35px",
+        } as React.CSSProperties
+      }
       navigation={true}
       slidesPerView={1}
       spaceBetween={30}
       loop={true}
       modules={[Pagination, Navigation]}
-      pagination={{
-        clickable: true,
-      }}
-      className="HeroSwiper"
+      pagination={{ clickable: true }}
     >
-      {/* is loading case */}
-
       {status === "loading" ? (
         <SwiperSlide
           style={{
@@ -89,17 +78,15 @@ export default function FlowerBouquetSwiper() {
           <ShowSkeleton />
         </SwiperSlide>
       ) : (
-        items.map((photo) => (
+        items.map((product) => (
           <SwiperSlide
-            key={photo.id}
+            key={product.id}
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            {/* product card */}
-
             <Card
               sx={{
                 width: { xs: "80%", md: "60%" },
@@ -107,42 +94,35 @@ export default function FlowerBouquetSwiper() {
                 display: "flex",
                 flexDirection: "column",
                 borderRadius: "40px",
-                overflow: "hidden",
-                boxShadow: "0px 20px 40px  rgba(0,0,0,0.4)",
+                boxShadow: "0px 20px 40px rgba(0,0,0,0.4)",
               }}
             >
               <CardMedia
                 component="img"
                 sx={{
                   height: "70%",
-                  width: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  backgroundColor: theme.palette.background.paper,
+                  objectFit: "contain",
+                  bgcolor: "#f9f9f9",
+                  p: 2,
                 }}
-                image={photo.src.large2x}
-                title="green iguana"
+                image={product.thumbnail}
+                title={product.title}
               />
               <CardContent
                 sx={{
-                  width: "90%",
-                  height: "5px",
                   flexGrow: 1,
-                  gap: 1,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  textAlign: "center",
                 }}
               >
                 <Typography
                   sx={{
-                    pt: "135px",
-                    fontSize: { xs: "1.8rem", md: "2.2rem" },
+                    fontSize: { md: "1.2rem", lg: "1.5rem" },
                   }}
                 >
-                  {photo.alt || "Beautiful Bouquet"}
+                  {product.description}
                 </Typography>
               </CardContent>
               <CardActions
@@ -154,20 +134,18 @@ export default function FlowerBouquetSwiper() {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "1.9rem", md: "2.5rem" },
-                    pt: "110px",
+                    fontSize: { xs: "1.2rem", md: "1.9rem" },
                     fontWeight: "bold",
                   }}
                 >
-                  $59
+                  ${product.price}
                 </Typography>
                 <Button
                   size="large"
                   sx={{
-                    mt: 13,
                     backgroundColor: "transparent",
                     border: `2px solid ${theme.palette.primary.main}`,
-                    padding: "8px 20px",
+                    padding: "5px 20px",
                     cursor: "pointer",
                     borderRadius: "20px",
                     fontSize: { xs: "1.2rem", md: "1.5rem" },
@@ -180,7 +158,7 @@ export default function FlowerBouquetSwiper() {
                     },
                   }}
                   onClick={() => {
-                    dispatch(addToCart(photo));
+                    dispatch(addToCart(product));
                     dispatch(
                       showSnackbar({
                         message: "Product added to cart!",

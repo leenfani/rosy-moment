@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
-import { MyThemeProvider } from "./app/theme/MyThemeProvider.jsx";
-import { AuthProvider } from "./features/auth/providers/AuthProvider.jsx";
+import App from "./App";
+import { MyThemeProvider } from "./app/theme/MyThemeProvider";
+import { AuthProvider } from "./features/auth/providers/AuthProvider";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./app/store";
 import { Provider } from "react-redux";

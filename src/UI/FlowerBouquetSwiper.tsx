@@ -1,8 +1,15 @@
+// Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+// required modules
 import { Pagination, Navigation } from "swiper/modules";
+
+// MUI
 import {
   useTheme,
   Card,
@@ -14,27 +21,26 @@ import {
 } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import ShowSkeleton from "../shared/Skeleton";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../features/products/productsSlice";
+
+// Redux
+import { fetchFlowerBouqet } from "../features/products/flowerBouquetSlice";
 import { addToCart } from "../features/cart/cartSlice";
 import { showSnackbar } from "../shared/uiSlice";
+import { useAppDispatch, useAppSelector } from "../app/redux-hooks";
+
+// React
 import { useEffect } from "react";
 
-export default function ProductsSwiper({ type }) {
-  const dispatch = useDispatch();
+export default function FlowerBouquetSwiper() {
+  const dispatch = useAppDispatch();
+  const { items, status, error } = useAppSelector((state) => state.flowerBouquet);
   const theme = useTheme();
-
-  const { jewelry, watches, status, error } = useSelector(
-    (state) => state.products,
-  );
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchProducts());
+      dispatch(fetchFlowerBouqet());
     }
   }, [status, dispatch]);
-
-  const items = (type === "jewelry" ? jewelry : watches) || [];
 
   if (status === "failed") {
     return (
@@ -49,17 +55,29 @@ export default function ProductsSwiper({ type }) {
       style={{
         "--swiper-navigation-color": theme.palette.primary.main,
         "--swiper-pagination-color": theme.palette.primary.main,
+        overflow: "hidden",
         paddingBottom: "30px",
         height: "850px",
         "--swiper-navigation-size": "35px",
-      }}
+        "--swiper-navigation-sides-offset": "5px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }as React.CSSProperties}
+      
+      centeredSlides={true}
       navigation={true}
       slidesPerView={1}
       spaceBetween={30}
       loop={true}
       modules={[Pagination, Navigation]}
-      pagination={{ clickable: true }}
+      pagination={{
+        clickable: true,
+      }}
+      className="HeroSwiper"
     >
+      {/* is loading case */}
+
       {status === "loading" ? (
         <SwiperSlide
           style={{
@@ -71,15 +89,17 @@ export default function ProductsSwiper({ type }) {
           <ShowSkeleton />
         </SwiperSlide>
       ) : (
-        items.map((product) => (
+        items.map((photo) => (
           <SwiperSlide
-            key={product.id}
+            key={photo.id}
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
+            {/* product card */}
+
             <Card
               sx={{
                 width: { xs: "80%", md: "60%" },
@@ -87,36 +107,43 @@ export default function ProductsSwiper({ type }) {
                 display: "flex",
                 flexDirection: "column",
                 borderRadius: "40px",
-                boxShadow: "0px 20px 40px rgba(0,0,0,0.4)",
+                overflow: "hidden",
+                boxShadow: "0px 20px 40px  rgba(0,0,0,0.4)",
               }}
             >
               <CardMedia
                 component="img"
                 sx={{
                   height: "70%",
-                  objectFit: "contain",
-                  bgcolor: "#f9f9f9",
-                  p: 2,
+                  width: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  backgroundColor: theme.palette.background.paper,
                 }}
-                image={product.thumbnail}
-                title={product.title}
+                loading="lazy"
+                image={photo.src.large2x}
+                title="green iguana"
               />
               <CardContent
                 sx={{
+                  width: "90%",
+                  height: "5px",
                   flexGrow: 1,
+                  gap: 1,
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
+                  textAlign: "center",
                 }}
               >
                 <Typography
-                  sx={{ fontSize: { xs: "1.8rem", md: "2.2rem" }, mt: 2 }}
+                  sx={{
+                    pt: 12,
+                    fontSize: { xs: "1.3rem", md: "1.7rem", lg: "2rem" },
+                  }}
                 >
-                  {product.title}
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  {product.brand} - {product.category.replace("-", " ")}
+                  {photo.alt || "Beautiful Bouquet"}
                 </Typography>
               </CardContent>
               <CardActions
@@ -128,18 +155,20 @@ export default function ProductsSwiper({ type }) {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "1.9rem", md: "2.5rem" },
+                    fontSize: { xs: "1.9rem", md: "2.4rem" },
+                    pt: "100px",
                     fontWeight: "bold",
                   }}
                 >
-                  ${product.price}
+                  $59
                 </Typography>
                 <Button
                   size="large"
                   sx={{
+                    mt: 13,
                     backgroundColor: "transparent",
                     border: `2px solid ${theme.palette.primary.main}`,
-                    padding: "8px 20px",
+                    padding: "5px 20px",
                     cursor: "pointer",
                     borderRadius: "20px",
                     fontSize: { xs: "1.2rem", md: "1.5rem" },
@@ -152,7 +181,7 @@ export default function ProductsSwiper({ type }) {
                     },
                   }}
                   onClick={() => {
-                    dispatch(addToCart(product));
+                    dispatch(addToCart(photo));
                     dispatch(
                       showSnackbar({
                         message: "Product added to cart!",

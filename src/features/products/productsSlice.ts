@@ -1,7 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {
+  womenJewelleryState,
+  Item,
+} from "../../types/productsTypes/products";
 
-export const fetchProducts = createAsyncThunk(
+export const fetchProducts = createAsyncThunk<{ jewelry: Item[], watches: Item[] }>(
   "products/fetchProducts",
   async () => {
     const [jewelryRes, watchesRes] = await Promise.all([
@@ -16,15 +20,17 @@ export const fetchProducts = createAsyncThunk(
   },
 );
 
-export const productsSlice = createSlice({
-  name: "products",
-  initialState: {
-    jewelry: [],
+const initialState:womenJewelleryState= {
+    jewellery: [],
     watches: [],
     status: "idle",
     error: null,
-  },
+  }
 
+export const productsSlice = createSlice({
+  name: "products",
+  initialState,
+  reducers:{},
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -33,7 +39,7 @@ export const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
 
-        state.jewelry = action.payload.jewelry;
+        state.jewellery = action.payload.jewelry;
         state.watches = action.payload.watches;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
