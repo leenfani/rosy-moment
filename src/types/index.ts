@@ -1,2 +1,3 @@
-export * from "./authContextTypes"
-export * from "../types/productsTypes/flowersBouquet"
+export * from "./authContextTypes";
+export * from "./productsTypes/flowersBouquet";
+export * from "./productsTypes/products";

@@ -1,7 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { NormalizedProduct } from "../../types/index";
 
-export default function SearchSuggestions({ suggestions }) {
+interface SearchSuggestionsProps {
+  suggestions: NormalizedProduct[];
+}
+export default function SearchSuggestions({
+  suggestions,
+}: SearchSuggestionsProps) {
   const navigate = useNavigate();
 
   if (!suggestions.length) return null;
@@ -28,7 +34,9 @@ export default function SearchSuggestions({ suggestions }) {
             cursor: "pointer",
             "&:hover": { bgcolor: "action.hover" },
           }}
-          onClick={() => navigate(`/search?q=${item.title}`)}
+          onClick={() =>
+            navigate(`/search?q=${encodeURIComponent(item.title)}`)
+          }
         >
           <img
             src={item.image}

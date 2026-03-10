@@ -40,8 +40,9 @@ export default function NavBar() {
   const handleSearch = () => {
     if (!searchTerm.trim()) return;
     navigate(`/search?q=${searchTerm}`);
+    navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
+    setSearchTerm("");
   };
-  // Set Theme Mode With handleToggle
 
   const { mode, setMode } = useColorScheme();
   const isDarkMode = mode === "dark";
@@ -119,6 +120,8 @@ export default function NavBar() {
                   lg: "400px",
                 },
               }}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              onBlur={() => setTimeout(() => setSearchTerm(""), 200)}
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
             />

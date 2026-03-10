@@ -1,5 +1,6 @@
 export interface PhotoSources {
   large2x: string;
+
 }
 
 export interface Photo {

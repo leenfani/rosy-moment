@@ -14,17 +14,22 @@ import {
 } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import ShowSkeleton from "../shared/Skeleton";
-import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../features/products/productsSlice";
 import { addToCart } from "../features/cart/cartSlice";
 import { showSnackbar } from "../shared/uiSlice";
 import { useEffect } from "react";
 
-export default function ProductsSwiper({ type }) {
-  const dispatch = useDispatch();
+import { useAppDispatch, useAppSelector } from "../app/redux-hooks";
+
+interface ProductsSwiperProps {
+  type: "jewellery" | "watches";
+}
+
+export default function ProductsSwiper({ type }: ProductsSwiperProps) {
+  const dispatch = useAppDispatch();
   const theme = useTheme();
 
-  const { jewelry, watches, status, error } = useSelector(
+  const { jewellery, watches, status, error } = useAppSelector(
     (state) => state.products,
   );
 
@@ -34,7 +39,7 @@ export default function ProductsSwiper({ type }) {
     }
   }, [status, dispatch]);
 
-  const items = (type === "jewelry" ? jewelry : watches) || [];
+  const items = (type === "jewellery" ? jewellery : watches) || [];
 
   if (status === "failed") {
     return (
@@ -46,13 +51,15 @@ export default function ProductsSwiper({ type }) {
 
   return (
     <Swiper
-      style={{
-        "--swiper-navigation-color": theme.palette.primary.main,
-        "--swiper-pagination-color": theme.palette.primary.main,
-        paddingBottom: "30px",
-        height: "850px",
-        "--swiper-navigation-size": "35px",
-      }}
+      style={
+        {
+          "--swiper-navigation-color": theme.palette.primary.main,
+          "--swiper-pagination-color": theme.palette.primary.main,
+          paddingBottom: "30px",
+          height: "850px",
+          "--swiper-navigation-size": "35px",
+        } as React.CSSProperties
+      }
       navigation={true}
       slidesPerView={1}
       spaceBetween={30}
