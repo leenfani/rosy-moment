@@ -23,17 +23,19 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import ShowSkeleton from "../shared/Skeleton";
 
 // Redux
-import { useSelector, useDispatch } from "react-redux";
 import { fetchFlowerBouqet } from "../features/products/flowerBouquetSlice";
 import { addToCart } from "../features/cart/cartSlice";
 import { showSnackbar } from "../shared/uiSlice";
+import { useAppDispatch, useAppSelector } from "../app/redux-hooks";
 
 // React
 import { useEffect } from "react";
 
 export default function FlowerBouquetSwiper() {
-  const dispatch = useDispatch();
-  const { items, status, error } = useSelector((state) => state.flowerBouquet);
+  const dispatch = useAppDispatch();
+  const { items, status, error } = useAppSelector(
+    (state) => state.flowerBouquet,
+  );
   const theme = useTheme();
 
   useEffect(() => {
@@ -52,19 +54,20 @@ export default function FlowerBouquetSwiper() {
 
   return (
     <Swiper
-      style={{
-        "--swiper-navigation-color": theme.palette.primary.main,
-        "--swiper-pagination-color": theme.palette.primary.main,
-        overflow: "hidden",
-        paddingBottom: "30px",
-        height: "850px",
-        "--swiper-navigation-size": "35px",
-        "--swiper-navigation-sides-offset": "5px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-      loading="lazy"
+      style={
+        {
+          "--swiper-navigation-color": theme.palette.primary.main,
+          "--swiper-pagination-color": theme.palette.primary.main,
+          overflow: "hidden",
+          paddingBottom: "30px",
+          height: "850px",
+          "--swiper-navigation-size": "35px",
+          "--swiper-navigation-sides-offset": "5px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        } as React.CSSProperties
+      }
       centeredSlides={true}
       navigation={true}
       slidesPerView={1}
@@ -120,6 +123,7 @@ export default function FlowerBouquetSwiper() {
                   objectPosition: "center",
                   backgroundColor: theme.palette.background.paper,
                 }}
+                loading="lazy"
                 image={photo.src.large2x}
                 title="green iguana"
               />

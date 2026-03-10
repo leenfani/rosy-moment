@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Photo, FlowersBouquetState } from "../../types/index";
 
 const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
 
-export const fetchFlowerBouqet = createAsyncThunk(
+export const fetchFlowerBouqet = createAsyncThunk<Photo[]>(
   "flowerBouquet/fetchFlowerBouqet",
   async () => {
     const response = await axios.get(
@@ -17,16 +18,18 @@ export const fetchFlowerBouqet = createAsyncThunk(
     return response.data.photos;
   },
 );
+const initialState: FlowersBouquetState = {
+  items: [],
+  status: "idle",
+  error: null,
+};
 
 export const flowerBouquetSlice = createSlice({
   name: "flowersBouquet",
-  initialState: {
-    items: [],
-    status: "idle",
-    error: null,
-  },
-  extraReducers: (build) => {
-    build
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
       .addCase(fetchFlowerBouqet.pending, (state) => {
         state.status = "loading";
       })
