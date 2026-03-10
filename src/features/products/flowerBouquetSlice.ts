@@ -4,11 +4,11 @@ import { Photo, FlowersBouquetState } from "../../types/index";
 
 const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
 
-export const fetchFlowerBouqet = createAsyncThunk<Photo[]>(
+export const fetchFlowerBouqet = createAsyncThunk<Photo[], number | undefined>(
   "flowerBouquet/fetchFlowerBouqet",
-  async () => {
+  async (limit = 10) => {
     const response = await axios.get(
-      "https://api.pexels.com/v1/search?query=bouquet",
+      `https://api.pexels.com/v1/search?query=bouquet+flower&per_page=${limit}`,
       {
         headers: {
           Authorization: API_KEY,

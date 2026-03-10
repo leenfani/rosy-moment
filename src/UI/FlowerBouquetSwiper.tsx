@@ -33,12 +33,14 @@ import { useEffect } from "react";
 
 export default function FlowerBouquetSwiper() {
   const dispatch = useAppDispatch();
-  const { items, status, error } = useAppSelector((state) => state.flowerBouquet);
+  const { items, status, error } = useAppSelector(
+    (state) => state.flowerBouquet,
+  );
   const theme = useTheme();
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchFlowerBouqet());
+      dispatch(fetchFlowerBouqet(10));
     }
   }, [status, dispatch]);
 
@@ -52,19 +54,20 @@ export default function FlowerBouquetSwiper() {
 
   return (
     <Swiper
-      style={{
-        "--swiper-navigation-color": theme.palette.primary.main,
-        "--swiper-pagination-color": theme.palette.primary.main,
-        overflow: "hidden",
-        paddingBottom: "30px",
-        height: "850px",
-        "--swiper-navigation-size": "35px",
-        "--swiper-navigation-sides-offset": "5px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }as React.CSSProperties}
-      
+      style={
+        {
+          "--swiper-navigation-color": theme.palette.primary.main,
+          "--swiper-pagination-color": theme.palette.primary.main,
+          overflow: "hidden",
+          paddingBottom: "30px",
+          height: "850px",
+          "--swiper-navigation-size": "35px",
+          "--swiper-navigation-sides-offset": "5px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        } as React.CSSProperties
+      }
       centeredSlides={true}
       navigation={true}
       slidesPerView={1}

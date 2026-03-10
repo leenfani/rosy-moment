@@ -35,7 +35,7 @@ export default function SearchResult() {
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchProducts());
-      dispatch(fetchFlowerBouqet());
+      dispatch(fetchFlowerBouqet(10));
     }
   }, [status, dispatch]);
 
