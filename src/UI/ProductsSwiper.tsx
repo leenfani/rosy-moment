@@ -48,9 +48,13 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
       </Typography>
     );
   }
+  if (status === "succeeded" && items.length === 0) {
+    return <Typography align="center">No products found for {type}</Typography>;
+  }
 
   return (
     <Swiper
+      key={type}
       style={
         {
           "--swiper-navigation-color": theme.palette.primary.main,
@@ -63,7 +67,7 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
       navigation={true}
       slidesPerView={1}
       spaceBetween={30}
-      loop={true}
+      loop={items.length > 0}
       modules={[Pagination, Navigation]}
       pagination={{ clickable: true }}
     >
@@ -80,7 +84,7 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
       ) : (
         items.map((product) => (
           <SwiperSlide
-            key={product.id}
+            key={`${type}-${product.id}`}
             style={{
               display: "flex",
               justifyContent: "center",

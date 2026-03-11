@@ -32,10 +32,10 @@ export default function Home() {
           fontWeight: "bold",
         }}
       >
-        WOMEN's JEWELRY
+        WOMEN's jewellery
       </Typography>
 
-      <ProductsSwiper type="jewelry" />
+      <ProductsSwiper type="jewellery" />
 
       <Typography
         sx={{

@@ -72,7 +72,7 @@ export default function FlowerBouquetSwiper() {
       navigation={true}
       slidesPerView={1}
       spaceBetween={30}
-      loop={true}
+      loop={items.length > 0}
       modules={[Pagination, Navigation]}
       pagination={{
         clickable: true,

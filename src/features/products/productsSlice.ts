@@ -5,16 +5,16 @@ import {
   Item,
 } from "../../types/productsTypes/products";
 
-export const fetchProducts = createAsyncThunk<{ jewelry: Item[], watches: Item[] }>(
+export const fetchProducts = createAsyncThunk<{ jewellery: Item[], watches: Item[] }>(
   "products/fetchProducts",
   async () => {
-    const [jewelryRes, watchesRes] = await Promise.all([
+    const [jewelleryRes, watchesRes] = await Promise.all([
       axios.get("https://dummyjson.com/products/category/womens-jewellery"),
       axios.get("https://dummyjson.com/products/category/mens-watches"),
     ]);
 
     return {
-      jewelry: jewelryRes.data.products,
+      jewellery: jewelleryRes.data.products,
       watches: watchesRes.data.products,
     };
   },
@@ -39,7 +39,7 @@ export const productsSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
 
-        state.jewellery = action.payload.jewelry;
+        state.jewellery = action.payload.jewellery;
         state.watches = action.payload.watches;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
