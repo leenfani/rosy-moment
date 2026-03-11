@@ -4,7 +4,6 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Button,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -17,8 +16,7 @@ import { fetchProducts } from "../products/productsSlice";
 import { fetchFlowerBouqet } from "../../features/products/flowerBouquetSlice";
 import { useTheme } from "@mui/material";
 
-import { Item } from "../../types/index";
-import { Photo } from "../../types/index";
+import { Item, Photo, CartItem } from "../../types/index";
 
 export default function SearchResult() {
   const theme = useTheme();
@@ -152,7 +150,17 @@ export default function SearchResult() {
                         },
                       }}
                       onClick={() => {
-                        dispatch(addToCart(item));
+                        const isPhoto = "src" in item;
+
+                        const cartItem: CartItem = {
+                          id: item.id,
+                          title: isPhoto ? item.alt : item.title,
+                          image: isPhoto ? item.src.large2x : item.thumbnail,
+                          price: isPhoto ? 59 : item.price,
+                          quantity: 1,
+                        };
+
+                        dispatch(addToCart(cartItem));
                         dispatch(
                           showSnackbar({
                             message: "Product added to cart!",

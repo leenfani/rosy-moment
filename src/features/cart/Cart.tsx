@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../app/redux-hooks";
 import { increaseQuantity, decreaseQuantity, clearCart } from "./cartSlice";
 
 // MUI
@@ -19,9 +19,8 @@ import { Link } from "react-router-dom";
 import { showSnackbar } from "../../shared/uiSlice";
 
 export default function Cart() {
-  const dispatch = useDispatch();
-
-  const { cartItems, totalPrice, totalQuantity } = useSelector(
+  const dispatch = useAppDispatch();
+  const { cartItems, totalPrice, totalQuantity } = useAppSelector(
     (state) => state.cart,
   );
 

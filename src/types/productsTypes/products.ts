@@ -7,7 +7,7 @@ export interface Item {
   thumbnail: string;
 }
 
-export interface womenJewelleryState {
+export interface ProductsState {
   jewellery: Item[];
   watches: Item[];
   status: "idle" | "loading" | "succeeded" | "failed";
