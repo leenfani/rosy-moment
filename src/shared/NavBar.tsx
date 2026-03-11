@@ -27,13 +27,13 @@ import { useSearch } from "../features/search/customHooksSearch/useSearch";
 import SearchSuggestions from "../features/search/SearchSuggestions";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../app/redux-hooks";
 
 export default function NavBar() {
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false);
 
   // Reading the items quantity from the cart slice
-  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const totalQuantity = useAppSelector((state) => state.cart.totalQuantity);
   const { searchTerm, setSearchTerm, suggestions } = useSearch();
   // handle search
   const navigate = useNavigate();
