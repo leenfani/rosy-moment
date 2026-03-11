@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
-  womenJewelleryState,
+  ProductsState,
   Item,
 } from "../../types/productsTypes/products";
 
@@ -20,7 +20,7 @@ export const fetchProducts = createAsyncThunk<{ jewellery: Item[], watches: Item
   },
 );
 
-const initialState:womenJewelleryState= {
+const initialState:ProductsState= {
     jewellery: [],
     watches: [],
     status: "idle",

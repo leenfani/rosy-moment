@@ -12,7 +12,15 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useTheme } from "@mui/material/styles";
 import { Box, Typography } from "@mui/material";
 
-const slidesData = [
+interface SlideItem {
+  id: number;
+  image: string;
+  title: string;
+  subtitle: string;
+  fontFamily?: string;
+}
+
+const slidesData: SlideItem[] = [
   {
     id: 1,
     image:
@@ -49,15 +57,17 @@ export default function HeroSwiper() {
 
   return (
     <Swiper
-      style={{
-        "--swiper-navigation-color": theme.palette.primary.main,
-        "--swiper-pagination-color": theme.palette.primary.main,
-        overflow: "hidden",
-        paddingBottom: "30px",
-        height: "450px",
-        "--swiper-navigation-size": "25px",
-        "--swiper-navigation-sides-offset": "5px",
-      }}
+      style={
+        {
+          "--swiper-navigation-color": theme.palette.primary.main,
+          "--swiper-pagination-color": theme.palette.primary.main,
+          overflow: "hidden",
+          paddingBottom: "30px",
+          height: "450px",
+          "--swiper-navigation-size": "25px",
+          "--swiper-navigation-sides-offset": "5px",
+        } as React.CSSProperties
+      }
       loop={true}
       centeredSlides={true}
       navigation={true}
