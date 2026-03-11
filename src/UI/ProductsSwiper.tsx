@@ -19,6 +19,9 @@ import { addToCart } from "../features/cart/cartSlice";
 import { showSnackbar } from "../shared/uiSlice";
 import { useEffect } from "react";
 
+import { CartItem } from "../types";
+
+
 import { useAppDispatch, useAppSelector } from "../app/redux-hooks";
 
 interface ProductsSwiperProps {
@@ -163,7 +166,15 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
                     },
                   }}
                   onClick={() => {
-                    dispatch(addToCart(product));
+                    const cartItem: CartItem = {
+                      id: product.id,
+                      title: product.description || "Beautiful Bouquet",
+                      image: product.thumbnail,
+                      price: product.price,
+                      quantity: 1,
+                    };
+
+                    dispatch(addToCart(cartItem));
                     dispatch(
                       showSnackbar({
                         message: "Product added to cart!",

@@ -31,6 +31,8 @@ import { useAppDispatch, useAppSelector } from "../app/redux-hooks";
 // React
 import { useEffect } from "react";
 
+import { CartItem } from "../types";
+
 export default function FlowerBouquetSwiper() {
   const dispatch = useAppDispatch();
   const { items, status, error } = useAppSelector(
@@ -143,7 +145,7 @@ export default function FlowerBouquetSwiper() {
                 <Typography
                   sx={{
                     pt: 12,
-                    fontSize: { xs: "1.4rem", md: "1.8rem", lg: "2rem" },
+                    fontSize: { xs: "1.4rem", md: "1.8rem", lg: "2.1rem" },
                   }}
                 >
                   {photo.alt || "Beautiful Bouquet"}
@@ -184,7 +186,15 @@ export default function FlowerBouquetSwiper() {
                     },
                   }}
                   onClick={() => {
-                    dispatch(addToCart(photo));
+                    const cartItem: CartItem = {
+                      id: photo.id,
+                      title: photo.alt || "Beautiful Bouquet",
+                      image: photo.src.large2x,
+                      price: 59,
+                      quantity: 1,
+                    };
+
+                    dispatch(addToCart(cartItem));
                     dispatch(
                       showSnackbar({
                         message: "Product added to cart!",
