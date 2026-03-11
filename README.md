@@ -29,6 +29,7 @@ Each feature is isolated, testable, and extendable without tight coupling.
 ---
 
 ## Core Features
+
 ### State Management
 
 - Redux Toolkit with multiple slices:
@@ -99,9 +100,11 @@ This prevents UI components from depending on inconsistent data formats.
 
 - Custom hook (useSearch) for controlled logic
 - Query-based routing with React Router
-- Real-time suggestions dropdown
+- Real-time suggestions dropdown with keyboard support
+- Enter key triggers search and dismisses suggestions
+- Clicking outside the search bar dismisses suggestions automatically
 - Normalized filtering across categories
-- Independent search results page
+- Independent search results page with improved layout
 
 Search logic is abstracted from UI rendering.
 
@@ -110,14 +113,40 @@ Search logic is abstracted from UI rendering.
 ### UI & Interaction
 
 - Material UI design system
-- Swiper.js for hero and product carousels
-- Dark / Light mode toggle using MUI color scheme
+- Swiper.js for hero and product carousels with improved slide layout
+- Dark / Light mode toggle using MUI Color Scheme API (v7)
 - Responsive layout across breakpoints
 - Loading skeleton states
 - Error state rendering
+- Empty state fallback when no products are found
 - Snackbar-based global notifications
 
 The UI layer remains declarative and clean — state mutations never happen inside components.
+
+---
+
+## TypeScript Migration
+
+The entire codebase was migrated from JavaScript to TypeScript. Key decisions:
+
+- Shared interfaces extracted to a centralized `src/types/` directory and colect them in index.ts to maintain "one source of truth" logic
+- Most components and hooks typed with explicit interfaces
+- MUI `severity` prop typed as a union type instead of `string`
+- `ReactNode` used for component `children` props
+- Redux hooks typed via `useAppDispatch` and `useAppSelector`
+- `PayloadAction<T>` used for all Redux reducers
+- API response shapes defined as interfaces before consumption
+- Normalizing data with TypeScript style for clean logic
+
+---
+
+## Recent Improvements
+
+- **TypeScript migration** — full codebase migrated from JavaScript to TypeScript
+- **Search UX** — Enter key triggers search, blur dismisses suggestions, results layout improved
+- **Flower Bouquet Swiper** — fixed incorrect image source that was displaying a strawberry instead of flower bouquets
+- **MUI v7 compatibility** — removed deprecated `mode` prop from `ThemeProvider`, aligned with `useColorScheme` API
+- **Empty state handling** — added fallback UI when a product category returns no results
 
 ---
 
@@ -136,51 +165,62 @@ No component handles logic outside its domain.
 
 ---
 
-
 ## Screenshots
 
 ### Home
+
 ![Home](./public/screenshots/rosy-moment.homePage.png)
 
 ### Products Slider
+
 ![Sign Up](./public/screenshots/rosy-moment.signup.png)
 ![Sign Up Success](./public/screenshots/rosy-moment.successSignUp.png)
 
 ### Cart
+
 ![Cart](./public/screenshots/rosy-moment.fullCart.png)
 ![Cart](./public/screenshots/rosy-moment.emptyCartChecked.png)
 
 ### Search Results
-![Search](./public/screenshots/rosy-moment.searchWatch.png)
 
+![Search](./public/screenshots/rosy-moment.searchWatch.png)
 
 ---
 
+## Tech Stack
 
 ### Core
+
 - React (Component-based architecture)
+- TypeScript (Static typing)
 - Redux Toolkit (Global state management)
 - React Router (Client-side routing)
 
 ### State & Logic
+
 - createAsyncThunk for async workflows
 - Context + useReducer (Authentication state isolation)
 - Custom Hooks (Search normalization & suggestion logic)
 - useState, useMemo & useEffect
 
 ### UI & Styling
+
 - Material UI (Component system + Theme customization)
 - MUI Color Scheme API (Dark / Light mode handling)
 - MUI System (sx prop responsive styling)
 - Swiper.js (Interactive sliders & carousels)
 
 ### Data & Networking
+
 - Axios (HTTP requests)
 - DummyJSON API
 - Pexels API
 
 ### Persistence
+
 - LocalStorage (Cart state persistence)
+
+---
 
 ## Configuration
 
@@ -190,6 +230,8 @@ Create a `.env` file in the root directory and define:
 
 VITE_PEXELS_API_KEY=your_api_key_here
 
+---
+
 ## Installation
 
 Clone the repository:
@@ -198,9 +240,11 @@ git clone https://github.com/leenfani/rosy-moment.git
 
 Install dependencies:
 
-npm install
+## npm install
+
+---
 
 ## Author
 
-Leen Fani
+Leen Fani  
 Frontend Developer
