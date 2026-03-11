@@ -143,7 +143,7 @@ export default function FlowerBouquetSwiper() {
                 <Typography
                   sx={{
                     pt: 12,
-                    fontSize: { xs: "1.3rem", md: "1.7rem", lg: "2rem" },
+                    fontSize: { xs: "1.4rem", md: "1.8rem", lg: "2rem" },
                   }}
                 >
                   {photo.alt || "Beautiful Bouquet"}

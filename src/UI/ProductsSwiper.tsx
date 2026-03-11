@@ -104,7 +104,7 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
               <CardMedia
                 component="img"
                 sx={{
-                  height: "70%",
+                  height: "65%",
                   objectFit: "contain",
                   bgcolor: "#f9f9f9",
                   p: 2,
@@ -123,7 +123,7 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
               >
                 <Typography
                   sx={{
-                    fontSize: { md: "1.2rem", lg: "1.5rem" },
+                    fontSize: { xs:"1.4rem", lg: "1.6rem" },
                   }}
                 >
                   {product.description}
@@ -133,7 +133,7 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
                 sx={{
                   justifyContent: "space-between",
                   px: { xs: 2, md: 6 },
-                  pb: 4,
+                  mb: 2,
                 }}
               >
                 <Typography
@@ -150,9 +150,10 @@ export default function ProductsSwiper({ type }: ProductsSwiperProps) {
                     backgroundColor: "transparent",
                     border: `2px solid ${theme.palette.primary.main}`,
                     padding: "5px 20px",
+                    
                     cursor: "pointer",
                     borderRadius: "20px",
-                    fontSize: { xs: "1.2rem", md: "1.5rem" },
+                    fontSize: { xs: "1.1rem", md: "1.5rem" },
                     transition: "0.3s",
                     "&:hover": {
                       backgroundColor: theme.palette.primary.main,
