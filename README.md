@@ -240,9 +240,8 @@ git clone https://github.com/leenfani/rosy-moment.git
 
 Install dependencies:
 
-## npm install
+ npm install
 
----
 
 ## Author
 
