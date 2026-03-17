@@ -181,9 +181,14 @@ No component handles logic outside its domain.
 ![Cart](./public/screenshots/rosy-moment.fullCart.png)
 ![Cart](./public/screenshots/rosy-moment.emptyCartChecked.png)
 
+### Search Suggestions
+
+![Search Suggestions](./public/screenshots/search.png)
+
 ### Search Results
 
-![Search](./public/screenshots/rosy-moment.searchWatch.png)
+![Search Results](./public/screenshots/bouquet.png)
+![Search Results](./public/screenshots/watch.png)
 
 ---
 
