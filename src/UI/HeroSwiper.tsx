@@ -105,6 +105,7 @@ export default function HeroSwiper() {
                 color: "#fff",
                 textAlign: "center",
                 px: 3,
+                boxSizing: "border-box",
               }}
             >
               <Typography
