@@ -9,7 +9,7 @@ The project demonstrates structured Redux Toolkit usage, normalized multi-source
 ## Live Demo
 
 Production Build:  
-https://rosy-moment.netlify.app/
+https://rosy-moment.vercel.app/
 
 ---
 
